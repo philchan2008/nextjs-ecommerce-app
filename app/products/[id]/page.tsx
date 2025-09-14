@@ -1,9 +1,13 @@
 import NotFoundPage from "@/app/not-found";
-import { products } from "@/app/product-data";
+import { connectToDb } from "@/app/api/db";
 //import Image from "next/image";
 
-export default function ProductDetailPage({ params }: { params: {id: string} }) {
-    const product = products.find(p => p.id === params.id);
+export default async function ProductDetailPage({ params }: { params: {id: string} }) {
+    const { db } = await connectToDb();
+    const productId = params.id;
+
+    //const product = products.find(p => p.id === params.id);
+    const product = await db.collection('products').findOne({ id: productId });
 
     if (!product) {
         return <NotFoundPage/>

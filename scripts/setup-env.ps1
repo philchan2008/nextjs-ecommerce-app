@@ -1,0 +1,1 @@
+Write-Host "DB_URI is: $env:DB_URI"

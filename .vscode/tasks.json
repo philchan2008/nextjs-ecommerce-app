@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Env-Setup",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/setup-env.sh", //Linux
+      "windows": {
+        "command": "pwsh -f ${workspaceFolder}\\scripts\\setup-env.ps1" //Windows
+      },
+      "problemMatcher": []
+    }
+  ]
+}
