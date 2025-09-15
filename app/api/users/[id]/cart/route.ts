@@ -4,11 +4,11 @@ import { connectToDb } from '@/app/api/db';
 
 type ShoppingCart = Record<string, string[]>;
 
-const carts: ShoppingCart = {
-  '1': ['123', '234'],
-  '2': ['345', '456'],
-  '3': ['234'],
-}
+// const carts: ShoppingCart = {
+//   '1': ['123', '234'],
+//   '2': ['345', '456'],
+//   '3': ['234'],
+// }
 
 type Params = {
   id: string;
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
   const { db } = await connectToDb();
 
   const userId = params.id;
-  const userCart = await db.collection('carts').findOne({ "id": userId });
+  const userCart = await db.collection('carts').findOne({ id: userId });
   console.log(userCart);
   if (!userCart) {
     return new Response(JSON.stringify([]), {

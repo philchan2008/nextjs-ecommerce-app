@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "debug-x": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "debugx": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
