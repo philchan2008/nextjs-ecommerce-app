@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { products } from '@/app/product-data';
+import { Product } from '@/app/product-data';
 import { connectToDb } from '@/app/api/db';
 
 type ShoppingCart = Record<string, string[]>;
@@ -19,7 +19,6 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
 
   const userId = Number(params.id); //NOTE: numeric userId type is required in this case.
   const userCart = await db.collection('carts').findOne({id: userId})
-  console.log(userCart);
   if (!userCart) {
     return new Response(JSON.stringify([]), {
       status: 200,
@@ -29,9 +28,9 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
     });
   }
 
-  const cartIds = userCart.cartIds;
-  const cartProducts = await db.collection('products').find({ id: { $in: cartIds } }).toArray();
-    console.log(cartProducts);
+  const cartProductIds = userCart.productIds;
+  const cartProducts = await db.collection('products').find({ id: { $in: cartProductIds } }).toArray();
+  
   return new Response(JSON.stringify(cartProducts), {
     status: 200,
     headers: {
