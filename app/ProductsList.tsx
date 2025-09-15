@@ -11,9 +11,9 @@ export default function ProductsListPage(
     
     const [cartProducts, setCartProducts] = useState(initialCartProducts)
 
-    async function addToCart(productId) {
+    async function addToCart(productId: string) {
         const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_BASE}/api/users/2/cart`, {
+            `${process.env.NEXT_PUBLIC_SITE_URL}/api/users/2/cart`, {
                 method: 'POST',
                 body: JSON.stringify({
                     productId,
@@ -28,7 +28,7 @@ export default function ProductsListPage(
 
     async function removeFromCart(productId: string) {
         const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_BASE}/api/users/2/cart`, {
+            `${process.env.NEXT_PUBLIC_SITE_URL}/api/users/2/cart`, {
                 method: 'DELETE',
                 body: JSON.stringify({
                     productId,
@@ -63,21 +63,21 @@ export default function ProductsListPage(
           </div>
           <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
           <p className="text-gray-600">${product.price}</p>
-          {productIsInCart(product.id)
-            ? (
-              <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-              onClick={(e) => {
-                e.preventDefault();
-                removeFromCart(product.id);
-              }}>Remove from Cart</button>
+          {productIsInCart(product.id) ? (
+                <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+                onClick={(e) => {
+                    e.preventDefault();
+                    removeFromCart(product.id);
+                    }}>Remove from Cart</button>
             ) : (
-              <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-              onClick={(e) => {
-                e.preventDefault();
-                addToCart(product.id);
-              }}>Add to Cart</button>
+                <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+                onClick={
+                    (e) => {
+                    e.preventDefault();
+                    addToCart(product.id);
+                    }}>Add to Cart</button>
             )}
         </Link>
       ))}

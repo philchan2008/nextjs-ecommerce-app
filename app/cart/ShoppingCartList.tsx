@@ -9,7 +9,7 @@ export default function ShoppingCartList({ initialCartProducts }: { initialCartP
 
   
     async function removeFromCart(productId: string) {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/users/2/cart`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/users/2/cart`, {
         method: 'DELETE',
         body: JSON.stringify({
             productId,
