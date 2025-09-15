@@ -17,8 +17,8 @@ type Params = {
 export async function GET(request: NextRequest, { params }: { params: Params }) {
   const { db } = await connectToDb();
 
-  const userId = params.id;
-  const userCart = await db.collection('carts').findOne({ id: userId });
+  const userId = Number(params.id); //NOTE: numeric userId type is required in this case.
+  const userCart = await db.collection('carts').findOne({id: userId})
   console.log(userCart);
   if (!userCart) {
     return new Response(JSON.stringify([]), {
