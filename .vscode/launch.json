@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Next.js: debug api",
+      "name": "Next.js: Debug API",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "node",
@@ -21,7 +21,7 @@
       "envFile": "${workspaceFolder}/.env"
     },
     {
-      "name": "Next.js: debug full stack",
+      "name": "Next.js: Debug Full Stack",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
@@ -37,13 +37,25 @@
       "envFile": "${workspaceFolder}/.env",
     },
     {
-      "name": "Next.js: debug client-side",
+      "name": "Next.js Debug",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--inspect=9230",
+        "${workspaceFolder}/node_modules/next/dist/bin/next"
+      ],
+      "skipFiles": ["<node_internals>/**"],
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "Next.js: Debug Client-side",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000"
     },
     {
-      "name": "Next.js: debug client-side (Firefox)",
+      "name": "Next.js: Debug Client-side (Firefox)",
       "type": "firefox",
       "request": "launch",
       "url": "http://localhost:3000",
@@ -60,16 +72,6 @@
       "type": "node",
       "request": "attach",
       "port": 9230,
-      "restart": false,
-      "skipFiles": ["<node_internals>/**"],
-      "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/.next/**/*.js"]
-    },
-    {
-      "name": "Attach to Next.js Router Server 29",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
       "restart": false,
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
