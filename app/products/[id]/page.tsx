@@ -1,4 +1,6 @@
 import NotFoundPage from "@/app/not-found";
+import EditableTable from '../components/EditableTable';
+
 
 export const dynamic = 'force-dynamic';
 

@@ -5,12 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Next.js: debug server-side",
-      "type": "node-terminal",
+      "name": "Next.js: debug api",
+      "type": "node",
       "request": "launch",
-      "command": "npm run debugx",
-      //"preLaunchTask": "Env-Setup", 
-      "envFile": "${workspaceFolder}/.env",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "--inspect", 
+        "${workspaceFolder}/node_modules/next/dist/bin/next", 
+        "dev"
+      ],
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${workspaceFolder}/*"
+      },
+      "skipFiles": ["<node_internals>/**"],
+      "envFile": "${workspaceFolder}/.env"
     },
     {
       "name": "Next.js: debug full stack",
@@ -52,6 +60,16 @@
       "type": "node",
       "request": "attach",
       "port": 9230,
+      "restart": false,
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/.next/**/*.js"]
+    },
+    {
+      "name": "Attach to Next.js Router Server 29",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
       "restart": false,
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,

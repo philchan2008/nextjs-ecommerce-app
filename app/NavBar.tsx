@@ -14,6 +14,9 @@ export default function NavBar() {
           <li>
             <Link href="/checkout" className="text-gray-700 hover:text-black">Check Out</Link>
           </li>
+          <li>
+            <Link href="/productMaintenance" className="text-gray-700 hover:text-black">Product Master Maintenance</Link>
+          </li>
         </ul>
       </div>
     </nav>
