@@ -24,8 +24,9 @@ export async function GET(request: NextRequest, { params } : { params: Params })
 
     if (!product) {
         return new Response(
-            'Product not found!', {
+            JSON.stringify({ error: 'Product not found!' }), {
                 status: 404,
+                headers: {'Content-Type': 'application/json'} 
             }
         )
     }
@@ -33,9 +34,7 @@ export async function GET(request: NextRequest, { params } : { params: Params })
     return  new Response(
             JSON.stringify(product), { 
                 status: 200,
-                headers: {
-                    'Content-Type': 'application/json'
-                } 
+                headers: {'Content-Type': 'application/json'} 
             }
         );
 }
@@ -47,7 +46,11 @@ export async function PATCH(request: NextRequest, { params }: { params: Params }
     try {
         body = await request.json();
     } catch (err) {
-        return new Response('Invalid JSON payload', { status: 400 });
+        return new Response(
+            JSON.stringify({ error: 'Invalid JSON payload' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' } 
+            });
     }
     const { db } = await connectToDb();
     const result = await db.collection('products').updateOne(
@@ -56,10 +59,18 @@ export async function PATCH(request: NextRequest, { params }: { params: Params }
     );
 
     if (result.matchedCount === 0) {
-        return new Response('Product not found!', { status: 404 });
+        return new Response(
+            JSON.stringify({ error: 'Product not found!' }), {
+            status: 404,
+            headers: { 'Content-Type': 'application/json' }
+        });
     }
 
-    return new Response('Product updated successfully.', { status: 200 });
+    return new Response(
+        JSON.stringify({ error: 'Product updated successfully.' }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
 }
 
 
@@ -70,7 +81,11 @@ export async function DELETE(request: NextRequest, { params }: { params: Params 
     const result = await db.collection('products').deleteOne({ id: productId });
 
     if (result.deletedCount === 0) {
-        return new Response('Product not found!', { status: 404 });
+        return new Response(
+            JSON.stringify({ error: 'Product not found!' }), {
+                status: 404,
+                headers: { 'Content-Type': 'application/json' }
+            });
     }
 
     return new Response('Product deleted successfully.', { status: 200 });

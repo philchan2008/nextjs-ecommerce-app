@@ -6,6 +6,12 @@ import { MongoClient, Db, ServerApiVersion } from 'mongodb';
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
 
+export async function closeConnection() {
+    if (cachedClient) {
+        await cachedClient.close()
+    }
+}
+
 export async function connectToDb() {
     if (cachedClient && cachedDb) {
         return {client: cachedClient, db: cachedDb};
