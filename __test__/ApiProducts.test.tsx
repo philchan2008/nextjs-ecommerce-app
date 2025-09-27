@@ -18,6 +18,7 @@ const requiredFields = [
   { field: "imageUrl", value: "", errMsg: "Missing or invalid fields", statusCode: 400},
   { field: "description", value: "", errMsg: "Missing or invalid fields", statusCode: 400 },
   { field: "price", value: -1, errMsg: "Price should be positive number.", statusCode: 400 },
+  { field: "name", value: "a".repeat(101), errMsg: "Name or description too long.", statusCode: 400 },
 ]
 
 let apiUrl: string;
